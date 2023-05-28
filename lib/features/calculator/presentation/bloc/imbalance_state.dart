@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'imbalance_bloc.dart';
 
 abstract class ImbalanceState {}
@@ -9,6 +8,8 @@ class ImbalanceInitial extends ImbalanceState {
     required this.imbalance,
   });
 }
+
+class ImbalanceDefault extends ImbalanceState {}
 
 class ImbalanceLongProfit extends ImbalanceInitial {
   final double total;

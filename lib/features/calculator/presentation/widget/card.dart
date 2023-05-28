@@ -51,47 +51,25 @@ class InfoCard extends StatelessWidget {
             : null,
         child: Padding(
           padding: const EdgeInsets.all(12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    label,
-                    style: TextStyles.label(context: context, color: theme.label),
-                  ),
-                  if (total != null)
-                    Text(
-                      "${total!.isNegative ? "- " : ""}\$${total!.abs().toStringAsFixed(2)}",
-                      style: TextStyles.currencyLarge(context: context, color: theme.currency),
-                    )
-                  else
-                    Text(
-                      "-",
-                      style: TextStyles.currencyLarge(context: context, color: theme.currency),
-                    ),
-                ],
+              Text(
+                label,
+                style: TextStyles.label(context: context, color: theme.label),
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  if (alpha != null)
-                    Text(
-                      "${alpha!.isNegative ? "- " : ""}\$${alpha!.abs().toStringAsFixed(2)}",
-                      style: TextStyles.currencySmall(context: context, color: theme.currencySmall),
-                    ),
-                  if (beta != null)
-                    Text(
-                      "${beta!.isNegative ? "- " : ""}\$${beta!.abs().toStringAsFixed(2)}",
-                      style: TextStyles.currencySmall(context: context, color: theme.currencySmall),
-                    ),
-                ],
-              ),
+              if (total != null)
+                Text(
+                  "${total!.isNegative ? "- " : ""}\$${total!.abs().toStringAsFixed(5)}",
+                  style: TextStyles.currencyLarge(context: context, color: theme.currency),
+                )
+              else
+                Text(
+                  "-",
+                  style: TextStyles.currencyLarge(context: context, color: theme.currency),
+                ),
             ],
           ),
         ),

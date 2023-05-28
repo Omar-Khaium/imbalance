@@ -1,4 +1,4 @@
-import 'package:calculator/core/text_styles.dart';
+import '../../../../core/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
@@ -63,7 +63,10 @@ class _FormWidgetState extends State<FormWidget> {
                   TextFormField(
                     autovalidateMode: AutovalidateMode.always,
                     controller: alphaController,
-                    keyboardType: const TextInputType.numberWithOptions(signed: false),
+                    keyboardType: const TextInputType.numberWithOptions(
+                      signed: false,
+                      decimal: true,
+                    ),
                     decoration: const InputDecoration(
                       hintText: "required",
                       border: OutlineInputBorder(),
@@ -75,7 +78,10 @@ class _FormWidgetState extends State<FormWidget> {
                   TextFormField(
                     autovalidateMode: AutovalidateMode.always,
                     controller: betaController,
-                    keyboardType: const TextInputType.numberWithOptions(signed: false),
+                    keyboardType: const TextInputType.numberWithOptions(
+                      signed: false,
+                      decimal: true,
+                    ),
                     decoration: const InputDecoration(
                       hintText: "required",
                       border: OutlineInputBorder(),
@@ -90,7 +96,7 @@ class _FormWidgetState extends State<FormWidget> {
               width: MediaQuery.of(context).size.width,
               height: 84,
               child: ElevatedButton(
-                onPressed:  () {
+                onPressed: () {
                   if (validator.currentState?.validate() ?? false) {
                     final num? a = num.tryParse(alphaController.text);
                     final num? b = num.tryParse(betaController.text);

@@ -10,7 +10,7 @@ class ShortLossWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ImbalanceBloc, ImbalanceState>(
-      buildWhen: (previous, current) => current is ImbalanceShortLoss,
+      buildWhen: (previous, current) => current is ImbalanceShortLoss || current is ImbalanceDefault,
       builder: (context, state) {
         if (state is ImbalanceShortLoss) {
           return InfoCard(

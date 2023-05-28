@@ -1,5 +1,5 @@
-import 'package:calculator/core/text_styles.dart';
-import 'package:calculator/features/calculator/presentation/widget/card.dart';
+import '../../../../core/text_styles.dart';
+import 'card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,9 +25,12 @@ class ImbalanceWidget extends StatelessWidget {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              InfoCard(
-                label: "Imbalance",
-                total: imbalance.isNaN ? null : imbalance,
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: InfoCard(
+                  label: "Imbalance",
+                  total: imbalance.isNaN ? null : imbalance,
+                ),
               ),
               const SizedBox(height: 16),
               Visibility(
@@ -44,7 +47,7 @@ class ImbalanceWidget extends StatelessWidget {
                       onPressed: () async {
                         final messenger = ScaffoldMessenger.of(context);
 
-                        final String content = "Imbalance: ${imbalance.isNegative ? "- " : ""}\$${imbalance.abs().toStringAsFixed(2)}";
+                        final String content = "Imbalance: ${imbalance.isNegative ? "- " : ""}\$${imbalance.abs().toStringAsFixed(5)}";
 
                         await Clipboard.setData(ClipboardData(text: content));
                         messenger.showSnackBar(const SnackBar(content: Text('Copied to your clipboard !')));
@@ -65,7 +68,9 @@ class ImbalanceWidget extends StatelessWidget {
                       elevation: 4,
                       shadowColor: theme.resetShadow,
                       padding: const EdgeInsets.all(12),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<ImbalanceBloc>().add(ImbalanceReset());
+                      },
                       avatar: Icon(
                         Icons.restore,
                         color: theme.card,

@@ -38,3 +38,5 @@ class ShortLoss extends ImbalanceEvent {
     required this.beta,
   });
 }
+
+class ImbalanceReset extends ImbalanceEvent {}

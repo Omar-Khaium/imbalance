@@ -65,6 +65,16 @@ class ImbalanceBloc extends Bloc<ImbalanceEvent, ImbalanceState> {
             beta: shortLossBeta,
           ),
         );
+      } else if (event is ImbalanceReset) {
+        longProfitAlpha = 0;
+        longProfitBeta = 0;
+        longLossAlpha = 0;
+        longLossBeta = 0;
+        shortProfitAlpha = 0;
+        shortProfitBeta = 0;
+        shortLossAlpha = 0;
+        shortLossBeta = 0;
+        emit(ImbalanceDefault());
       }
     });
   }
@@ -90,6 +100,6 @@ class ImbalanceBloc extends Bloc<ImbalanceEvent, ImbalanceState> {
     final double ll = longLoss();
     final double sp = shortProfit();
     final double sl = shortLoss();
-    return (ll == 0 || sl == 0) ? double.nan : (lp / ll) - (sp / sl);
+    return (lp + ll) - (sp + sl);
   }
 }
