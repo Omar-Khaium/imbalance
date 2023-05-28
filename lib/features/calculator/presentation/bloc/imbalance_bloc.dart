@@ -15,7 +15,7 @@ class ImbalanceBloc extends Bloc<ImbalanceEvent, ImbalanceState> {
   //! Short loss
   double shortLossAlpha = 0, shortLossBeta = 0;
 
-  ImbalanceBloc() : super(ImbalanceInitial(imbalance: 0)) {
+  ImbalanceBloc() : super(ImbalanceInitial(imbalance: double.nan)) {
     on<ImbalanceEvent>((event, emit) {
       if (event is LongProfit) {
         longProfitAlpha = event.alpha;
@@ -70,22 +70,26 @@ class ImbalanceBloc extends Bloc<ImbalanceEvent, ImbalanceState> {
   }
 
   double longProfit() {
-    return longProfitAlpha - longProfitBeta;
+    return (longProfitAlpha - longProfitBeta).abs();
   }
 
   double longLoss() {
-    return longLossAlpha + longLossBeta;
+    return (longLossAlpha + longLossBeta).abs();
   }
 
   double shortProfit() {
-    return shortProfitAlpha + shortProfitBeta;
+    return (shortProfitAlpha + shortProfitBeta).abs();
   }
 
   double shortLoss() {
-    return shortLossAlpha - shortLossBeta;
+    return (shortLossAlpha - shortLossBeta).abs();
   }
 
   double imbalance() {
-    return (longProfit() / longLoss()) - (shortProfit() / shortLoss());
+    final double lp = longProfit();
+    final double ll = longLoss();
+    final double sp = shortProfit();
+    final double sl = shortLoss();
+    return (ll == 0 || sl == 0) ? double.nan : (lp / ll) - (sp / sl);
   }
 }

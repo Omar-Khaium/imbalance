@@ -20,6 +20,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: "Imbalance",
       color: theme.background,
+      debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) => dependencies.dependency<ImbalanceBloc>(),
         child: const CalculatorPage(),

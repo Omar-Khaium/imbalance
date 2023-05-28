@@ -63,9 +63,9 @@ class InfoCard extends StatelessWidget {
                     label,
                     style: TextStyles.label(context: context, color: theme.label),
                   ),
-                  if (alpha != null && beta != null && total != null)
+                  if (total != null)
                     Text(
-                      "\$${total!.toStringAsFixed(2)}",
+                      "${total!.isNegative ? "- " : ""}\$${total!.abs().toStringAsFixed(2)}",
                       style: TextStyles.currencyLarge(context: context, color: theme.currency),
                     )
                   else
@@ -82,12 +82,12 @@ class InfoCard extends StatelessWidget {
                 children: [
                   if (alpha != null)
                     Text(
-                      "\$${alpha!.toStringAsFixed(2)}",
+                      "${alpha!.isNegative ? "- " : ""}\$${alpha!.abs().toStringAsFixed(2)}",
                       style: TextStyles.currencySmall(context: context, color: theme.currencySmall),
                     ),
                   if (beta != null)
                     Text(
-                      "\$${beta!.toStringAsFixed(2)}",
+                      "${beta!.isNegative ? "- " : ""}\$${beta!.abs().toStringAsFixed(2)}",
                       style: TextStyles.currencySmall(context: context, color: theme.currencySmall),
                     ),
                 ],

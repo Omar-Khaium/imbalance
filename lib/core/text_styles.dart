@@ -34,4 +34,13 @@ class TextStyles {
           ),
     );
   }
+
+  static TextStyle chip({required BuildContext context, required Color color}) {
+    return GoogleFonts.nunitoSans(
+      textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: color,
+            fontWeight: FontWeight.w600,
+          ),
+    );
+  }
 }
