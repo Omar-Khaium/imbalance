@@ -29,7 +29,7 @@ class CalculatorPage extends StatelessWidget {
               const ImbalanceWidget(),
               const SizedBox(height: 16),
               Text(
-                "v1.0.1",
+                "v1.0.4",
                 style: TextStyles.chip(context: context, color: theme.card),
               ),
             ],
