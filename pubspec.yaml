@@ -1,7 +1,7 @@
 name: calculator
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.0.0+3
+version: 1.0.1+101
 
 environment:
   sdk: '>=2.19.6 <3.0.0'

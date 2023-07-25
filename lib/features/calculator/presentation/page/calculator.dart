@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/color.dart';
+import '../../../../core/text_styles.dart';
 import '../../../../dependencies.dart';
 import '../widget/imbalance.dart';
 import '../widget/long.dart';
@@ -16,15 +17,21 @@ class CalculatorPage extends StatelessWidget {
       backgroundColor: theme.background,
       body: Padding(
         padding: MediaQuery.of(context).viewPadding.copyWith(left: 12, right: 12),
-        child: const SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              LongWidget(),
-              SizedBox(height: 16),
-              ShortWidget(),
-              SizedBox(height: 16),
-              ImbalanceWidget(),
+              const SizedBox(height: 16),
+              const LongWidget(),
+              const SizedBox(height: 16),
+              const ShortWidget(),
+              const SizedBox(height: 16),
+              const ImbalanceWidget(),
+              const SizedBox(height: 16),
+              Text(
+                "v1.0.1",
+                style: TextStyles.chip(context: context, color: theme.card),
+              ),
             ],
           ),
         ),
