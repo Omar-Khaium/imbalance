@@ -25,17 +25,11 @@ jobs:
         flutter-version: ${{ env.FLUTTER_VERSION }}
         cache: true
 
-    - name: GitHub Action for Firebase
-      uses: w9jds/firebase-action@v12.4.0
-
     - name: Build
       run: |
         flutter clean
         flutter pub get
-        flutter build web --release
-        firebase deploy
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        flutter build web --release -o public
 
     - uses: FirebaseExtended/action-hosting-deploy@v0
       with:

@@ -11,6 +11,7 @@ env:
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    name: Build
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -23,14 +24,11 @@ jobs:
         flutter-version: ${{ env.FLUTTER_VERSION }}
         cache: true
 
-    - name: GitHub Action for Firebase
-      uses: w9jds/firebase-action@v12.4.0
-
     - name: Build
       run: |
         flutter clean
         flutter pub get
-        flutter build web --release
+        flutter build web --release -o public
         firebase deploy
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
