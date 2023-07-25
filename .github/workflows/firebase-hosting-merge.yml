@@ -6,14 +6,34 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
+
+env:
+  FLUTTER_CHANNEL: 'stable'
+  FLUTTER_VERSION: '3.10.5'
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_IMBALANCE_X }}'
-          channelId: live
-          projectId: imbalance-x
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: ${{ env.FLUTTER_CHANNEL }}
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        cache: true
+
+    - name: Build
+      run: |
+        flutter clean
+        flutter pub get
+        flutter build web --release
+
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_IMBALANCE_X }}'
+        channelId: live
+        projectId: imbalance-x
