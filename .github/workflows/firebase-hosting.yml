@@ -7,6 +7,10 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  FLUTTER_CHANNEL: 'stable'
+  FLUTTER_VERSION: '3.10.5'
+  
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -19,6 +23,13 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+          
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
