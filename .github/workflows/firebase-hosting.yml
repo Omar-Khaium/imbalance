@@ -22,11 +22,6 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Authenticate Firebase
-        run: firebase login:ci --no-localhost --no-interactive
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
       - name: Build and deploy to Firebase Hosting
         run: |
           flutter packages get
