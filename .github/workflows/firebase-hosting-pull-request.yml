@@ -3,30 +3,12 @@
 
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
-
-env:
-  FLUTTER_CHANNEL: 'stable'
-  FLUTTER_VERSION: '3.10.5'
-
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: ${{ env.FLUTTER_CHANNEL }}
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          cache: true
-      
-      - name: Build and deploy to Firebase Hosting
-        run: |
-          flutter packages get
-          flutter build web --release
-          
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
